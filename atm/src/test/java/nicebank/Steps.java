@@ -21,12 +21,10 @@ public class Steps {
         }
     }
 
-    @Given("^I have deposited \\$(\\d+) in my account$")
-    public void i_have_deposited_$_in_my_account(int amount) throws Throwable {
-        Account myAccount = new Account();
-        myAccount.deposit(amount);
-
-        Assert.assertEquals("incorrect account balance - ", amount, myAccount.getBalance());
+    @Given("^I have deposited \\$(\\d+)\\.(\\d+) in my account$")
+    public void i_have_deposited_$_in_my_account(int arg1, int arg2) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
     }
 
     @When("^I request \\$(\\d+)$")
