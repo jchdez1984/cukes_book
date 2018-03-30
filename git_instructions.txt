@@ -1,6 +1,16 @@
+>>>>> Initialize git repo
+
+
 echo "# cukes_book" >> README.md
 git init
 git add README.md
 git commit -m "first commit"
 git remote add origin git@github.com:jchdez1984/cukes_book.git
 git push -u origin master
+
+
+>>>>> Remove untracked files (files added to .gitignore and still tracked)
+
+git rm -r --cached .
+git add .
+git commit -m "fixed untracked files"
