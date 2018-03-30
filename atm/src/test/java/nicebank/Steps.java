@@ -10,21 +10,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class Steps {
 
     public class Account{
-        private int balance;
+        private Money balance = new Money();
 
-        public void deposit(int amount){
-            balance += amount;
+        public void deposit(Money amount){
+            balance = balance.add(amount);
         }
 
-        public int getBalance(){
+        public Money getBalance(){
             return balance;
         }
     }
 
     @Given("^I have deposited \\$(\\d+)\\.(\\d+) in my account$")
-    public void i_have_deposited_$_in_my_account(int arg1, int arg2) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    public void i_have_deposited_$_in_my_account(int dollars, int cents) throws Throwable {
+        Account myAccount = new Account();
+        Money  money = new Money(dollars, cents);
+
+        myAccount.deposit(money);
+        Assert.assertEquals("incorrect account balance - ", money, myAccount.getBalance());
     }
 
     @When("^I request \\$(\\d+)$")
