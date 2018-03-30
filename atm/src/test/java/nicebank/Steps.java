@@ -10,14 +10,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class Steps {
 
     public class Account{
-        public Account(int openingBalance){
+        public void deposit(int amount){
 
+        }
+
+        public int getBalance(){
+            return 0;
         }
     }
 
     @Given("^I have deposited \\$(\\d+) in my account$")
     public void i_have_deposited_$_in_my_account(int amount) throws Throwable {
-        new Account(amount);
+        Account myAccount = new Account();
+        myAccount.deposit(amount);
+
+        Assert.assertEquals("incorrect account balance - ", amount, myAccount.getBalance());
     }
 
     @When("^I request \\$(\\d+)$")
