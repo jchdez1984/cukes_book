@@ -31,20 +31,33 @@ public class Steps {
     }
 
     class Teller {
-        public void withdrawFrom(Account account, int dollars) {
+        private CashSlot cashSlot;
 
+        public Teller(CashSlot cashSlot) {
+            this.cashSlot = cashSlot;
+        }
+
+        public void withdrawFrom(Account account, int dollars) {
+            cashSlot.dispense(dollars);
         }
     }
 
     class CashSlot {
+        private int contents;
+
         public int getContents() {
-            return 0;
+            return contents;
+        }
+
+        public void dispense(int dollars) {
+            contents = dollars;
         }
     }
 
     class KnowsTheDomain {
         private Account myAccount;
         private CashSlot cashSlot;
+        private Teller teller;
 
         public Account getMyAccount() {
             if (myAccount == null) {
@@ -62,6 +75,14 @@ public class Steps {
             return cashSlot;
         }
 
+        public Teller getTeller(){
+            if(teller == null){
+                teller = new Teller(getCashSlot());
+            }
+
+            return teller;
+        }
+
     }
 
     @Given("^I have deposited \\$(\\d+\\.\\d+) in my account$")
@@ -72,9 +93,8 @@ public class Steps {
     }
 
     @When("^I request \\$(\\d+)$")
-    public void i_request_$(int amount) throws Throwable {
-        Teller teller = new Teller();
-        teller.withdrawFrom(helper.getMyAccount(), amount);
+    public void i_request_$(int dollars) throws Throwable {
+        helper.getTeller().withdrawFrom(helper.getMyAccount(), dollars);
     }
 
     @Then("^\\$(\\d+) should be dispensed$")
