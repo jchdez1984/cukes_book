@@ -10,12 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class Steps {
 
     public class Account{
-        public void deposit(int amount){
+        private int balance;
 
+        public void deposit(int amount){
+            balance += amount;
         }
 
         public int getBalance(){
-            return 0;
+            return balance;
         }
     }
 
