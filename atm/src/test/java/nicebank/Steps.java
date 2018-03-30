@@ -12,40 +12,56 @@ import transforms.MoneyConverter;
 
 public class Steps {
 
-    private KnowsMyAccount helper;
+    private KnowsTheDomain helper;
 
-    public Steps(){
-        helper = new KnowsMyAccount();
+    public Steps() {
+        helper = new KnowsTheDomain();
     }
 
-    class Account{
+    class Account {
         private Money balance = new Money();
 
-        public void deposit(Money amount){
+        public void deposit(Money amount) {
             balance = balance.add(amount);
         }
 
-        public Money getBalance(){
+        public Money getBalance() {
             return balance;
         }
     }
 
-    class Teller{
-        public void withdrawFrom(Account account, int dollars){
+    class Teller {
+        public void withdrawFrom(Account account, int dollars) {
 
         }
     }
 
-    class KnowsMyAccount{
+    class CashSlot {
+        public int getContents() {
+            return 0;
+        }
+    }
+
+    class KnowsTheDomain {
         private Account myAccount;
+        private CashSlot cashSlot;
 
         public Account getMyAccount() {
-            if(myAccount == null){
+            if (myAccount == null) {
                 myAccount = new Account();
             }
 
             return myAccount;
         }
+
+        public CashSlot getCashSlot() {
+            if (cashSlot == null) {
+                cashSlot = new CashSlot();
+            }
+
+            return cashSlot;
+        }
+
     }
 
     @Given("^I have deposited \\$(\\d+\\.\\d+) in my account$")
@@ -57,14 +73,13 @@ public class Steps {
 
     @When("^I request \\$(\\d+)$")
     public void i_request_$(int amount) throws Throwable {
-       Teller teller = new Teller();
-       teller.withdrawFrom(helper.getMyAccount(), amount);
+        Teller teller = new Teller();
+        teller.withdrawFrom(helper.getMyAccount(), amount);
     }
 
     @Then("^\\$(\\d+) should be dispensed$")
-    public void $_should_be_dispensed(int arg1) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    public void $_should_be_dispensed(int dollars) throws Throwable {
+        Assert.assertEquals("incorrect amount dispensed - ", dollars, helper.getCashSlot().getContents());
     }
 
 }
