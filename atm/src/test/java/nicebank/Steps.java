@@ -11,7 +11,9 @@ import transforms.MoneyConverter;
 
 public class Steps {
 
-    public class Account{
+    private Account myAccount;
+
+    class Account{
         private Money balance = new Money();
 
         public void deposit(Money amount){
@@ -23,19 +25,24 @@ public class Steps {
         }
     }
 
+    class Teller{
+        public void withdrawFrom(Account account, int dollars){
+
+        }
+    }
 
     @Given("^I have deposited \\$(\\d+\\.\\d+) in my account$")
     public void iHaveDeposited$InMyAccount(@Transform(MoneyConverter.class) Money amount) throws Throwable {
-        Account myAccount = new Account();
+        myAccount = new Account();
         myAccount.deposit(amount);
 
         Assert.assertEquals("incorrect account balance -", amount, myAccount.getBalance());
     }
 
     @When("^I request \\$(\\d+)$")
-    public void i_request_$(int arg1) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    public void i_request_$(int amount) throws Throwable {
+       Teller teller = new Teller();
+       teller.withdrawFrom(myAccount, amount);
     }
 
     @Then("^\\$(\\d+) should be dispensed$")
