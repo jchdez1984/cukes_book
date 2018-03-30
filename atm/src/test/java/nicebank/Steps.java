@@ -9,10 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class Steps {
 
+    public class Account{
+        public Account(int openingBalance){
+
+        }
+    }
+
     @Given("^I have deposited \\$(\\d+) in my account$")
-    public void i_have_deposited_$_in_my_account(int arg1) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    public void i_have_deposited_$_in_my_account(int amount) throws Throwable {
+        new Account(amount);
     }
 
     @When("^I request \\$(\\d+)$")
