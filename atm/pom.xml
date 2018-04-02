@@ -13,6 +13,7 @@
       <cucumber.version>1.2.5</cucumber.version>
       <junit.version>4.11</junit.version>
       <picocontainer.version>1.2.5</picocontainer.version>
+      <jetty.version>9.2.0.M0</jetty.version>
    </properties>
 
 
@@ -56,6 +57,11 @@
            <scope>test</scope>
        </dependency>
        -->
+      <dependency>
+         <groupId>org.eclipse.jetty</groupId>
+         <artifactId>jetty-webapp</artifactId>
+         <version>${jetty.version}</version>
+      </dependency>
    </dependencies>
    <build>
       <plugins>
