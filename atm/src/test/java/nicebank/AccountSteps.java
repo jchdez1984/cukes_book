@@ -11,6 +11,10 @@ import transforms.MoneyConverter;
 public class AccountSteps {
     KnowsTheDomain helper;
 
+    static {
+        System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver");
+    }
+
     public AccountSteps(KnowsTheDomain helper){ this.helper = helper;}
 
 
