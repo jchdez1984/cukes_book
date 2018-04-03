@@ -5,7 +5,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.rowset.serial.SerialException;
 import java.io.IOException;
 
 public class AtmServlet extends HttpServlet {
@@ -13,9 +12,11 @@ public class AtmServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().println(
-                "<html><head><title>Nice Bank Atm</title></head>" +
-                        "<body><h1>welcome to our nice bank!!</h1></body></html>"
-        );
+        response.getWriter().println( "<html><head><title>ATM</title></head>" +
+                "<body><form action=\"/withdraw\" method=\"post\">" +
+                "<label for=\"amount\">Amount</label>" +
+                "<input type=\"text\" id=\"amount\" name=\"amount\">" +
+                "<button type=\"submit\" id=\"withdraw\">Withdraw</button>" +
+                "</form></body></html>");
     }
 }

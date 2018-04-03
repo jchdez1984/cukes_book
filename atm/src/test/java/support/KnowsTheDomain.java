@@ -3,11 +3,14 @@ package support;
 import nicebank.Account;
 import nicebank.CashSlot;
 import nicebank.Teller;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 public class KnowsTheDomain {
     private Account myAccount;
     private Teller teller;
     private CashSlot cashSlot;
+    private EventFiringWebDriver webDriver;
 
     public Account getMyAccount() {
         if (myAccount == null){
@@ -31,6 +34,13 @@ public class KnowsTheDomain {
         }
 
         return cashSlot;
+    }
+
+    public EventFiringWebDriver getWebDriver() {
+        if (webDriver == null){
+            webDriver = new EventFiringWebDriver(new FirefoxDriver());
+        }
+        return webDriver;
     }
 }
 
