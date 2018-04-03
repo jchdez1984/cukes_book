@@ -17,7 +17,7 @@ public class AtmUserInterface implements Teller {
     public void withdrawFrom(Account account, int dollars) {
         try {
             webDriver.get("http://192.168.0.5:9988/");
-            webDriver.findElement(By.id("amount"));
+            webDriver.findElement(By.id("amount")).sendKeys(String.valueOf(dollars));
             webDriver.findElement(By.id("withdraw")).click();
         } finally {
             webDriver.close();
